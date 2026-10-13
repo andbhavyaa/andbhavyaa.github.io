@@ -1,0 +1,1141 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Bhavyaa | Software Engineer</title>
+    <meta
+      name="description"
+      content="Portfolio of Bhavyaa, a full-stack and mobile software engineer."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Caveat:wght@500;700&family=Cormorant+Garamond:ital,wght@0,500;0,700;1,500&family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        /* --lin: #274b2e;  */
+        --lin: #2c3950;
+        --lin2: #1c293a;
+        --paper: #f4e6d6;
+        --ink: #1a2b22;
+        --rose: #b3585a;
+        --blush: #c9ebf1;
+        --gold: #42b1ec;
+        --sage: #a9b799;
+        --serif: "Cormorant Garamond", Georgia, serif;
+        --hand: "Caveat", "Comic Sans MS", cursive;
+        --sans: "DM Sans", system-ui, sans-serif;
+      }
+      * {
+        box-sizing: border-box;
+        margin: 0;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        font-family: var(--sans);
+        color: var(--ink);
+        line-height: 1.55;
+        background: var(--lin2);
+      }
+      a {
+        color: inherit;
+      }
+      :focus-visible {
+        outline: 3px solid var(--gold);
+        outline-offset: 3px;
+      }
+      body[data-mode="minimal"] #max,
+      body[data-mode="maximal"] #min {
+        display: none;
+      }
+      body[data-mode="minimal"] {
+        background: #faf6ef;
+      }
+
+      .toggle {
+        position: fixed;
+        top: 14px;
+        right: 14px;
+        z-index: 30;
+        display: flex;
+        background: var(--paper);
+        border: 2px solid var(--ink);
+        border-radius: 99px;
+        padding: 3px;
+        box-shadow: 3px 3px 0 rgba(0, 0, 0, 0.35);
+      }
+      .toggle button {
+        font: 700 0.8rem var(--sans);
+        border: 0;
+        background: none;
+        padding: 7px 14px;
+        border-radius: 99px;
+        cursor: pointer;
+        color: var(--ink);
+      }
+      .toggle button[aria-pressed="true"] {
+        background: var(--ink);
+        color: var(--paper);
+      }
+
+      /* shared scrapbook bits */
+      .tape {
+        position: relative;
+      }
+      .tape::after {
+        content: "";
+        position: absolute;
+        top: -11px;
+        left: 50%;
+        width: 84px;
+        height: 22px;
+        transform: translateX(-50%) rotate(-3deg);
+        background: repeating-linear-gradient(
+          45deg,
+          var(--t, #d9a7a0) 0 6px,
+          rgba(255, 255, 255, 0.4) 6px 12px
+        );
+        opacity: 0.92;
+        z-index: 2;
+      }
+      .st {
+        position: absolute;
+        width: 28px;
+        height: 28px;
+        background: var(--gold);
+        clip-path: polygon(
+          50% 0,
+          61% 35%,
+          98% 35%,
+          68% 57%,
+          79% 91%,
+          50% 70%,
+          21% 91%,
+          32% 57%,
+          2% 35%,
+          39% 35%
+        );
+      }
+      .hand {
+        font-family: var(--hand);
+        font-weight: 700;
+      }
+
+      /* ===== COVER ===== */
+      .cover {
+        position: relative;
+        min-height: 100vh;
+        min-height: 100svh;
+        overflow: hidden;
+        background-color: var(--lin);
+        background-image:
+          repeating-linear-gradient(
+            0deg,
+            rgba(0, 0, 0, 0.14) 0 1px,
+            transparent 1px 3px
+          ),
+          repeating-linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.05) 0 1px,
+            transparent 1px 3px
+          );
+      }
+      .cover::after {
+        content: "";
+        position: absolute;
+        left: 72%;
+        top: 0;
+        bottom: 0;
+        width: 4px;
+        background: rgba(0, 0, 0, 0.28);
+        box-shadow: 2px 0 6px rgba(0, 0, 0, 0.3);
+      }
+      .polaroid {
+        position: absolute;
+        left: 12%;
+        top: 10%;
+        width: min(310px, 26vw);
+        min-width: 220px;
+        transform: rotate(-4deg);
+        background: #efe8da;
+        padding: 18px 18px 44px;
+        outline: 3px dotted #c4b9a3;
+        outline-offset: -9px;
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.45);
+        transform-origin: 50% 0;
+        animation: settle 2.2s ease-out 1;
+      }
+      .polaroid img {
+        width: 100%;
+        aspect-ratio: 4/5;
+        object-fit: cover;
+        display: block;
+        filter: sepia(0.25);
+      }
+      .polaroid figcaption {
+        position: absolute;
+        bottom: 8px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font: 700 1.35rem var(--hand);
+        color: #6b4a40;
+      }
+      @keyframes settle {
+        from {
+          transform: rotate(7deg);
+        }
+        60% {
+          transform: rotate(-6deg);
+        }
+        to {
+          transform: rotate(-4deg);
+        }
+      }
+      .clip {
+        position: absolute;
+        left: calc(12% + 190px);
+        top: 6%;
+        width: 84px;
+        height: 32px;
+        border: 4px solid #c3bdb1;
+        border-radius: 20px;
+        transform: rotate(-32deg);
+        z-index: 3;
+      }
+      .string {
+        position: absolute;
+        left: 0;
+        right: 0;
+        height: 2px;
+        background: linear-gradient(#d8d8d8, #7a7a7a 55%, #d8d8d8);
+        box-shadow: 0 3px 4px rgba(0, 0, 0, 0.45);
+      }
+      .s1 {
+        top: 73%;
+      }
+      .s2 {
+        top: 73%;
+      }
+      .lockets {
+        position: absolute;
+        left: 36%;
+        top: calc(62% + 82px);
+        display: flex;
+        gap: 14px;
+      }
+      .lockets div {
+        transform-origin: 50% 0;
+        animation: sway 4.5s ease-in-out infinite alternate;
+      }
+      .lockets div:nth-child(2) {
+        animation-delay: -2s;
+      }
+      .lockets b {
+        display: block;
+        width: 2px;
+        height: 20px;
+        background: #b9b2a6;
+        margin: 0 auto;
+      }
+      .lockets i {
+        display: block;
+        width: 70px;
+        height: 70px;
+        border-radius: 50%;
+        border: 6px solid #c9c3b6;
+        overflow: hidden;
+        box-shadow: 0 5px 8px rgba(0, 0, 0, 0.4);
+      }
+      .lockets img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      @keyframes sway {
+        from {
+          transform: rotate(-5deg);
+        }
+        to {
+          transform: rotate(5deg);
+        }
+      }
+      .ctitle {
+        position: absolute;
+        left: 76%;
+        top: 30%;
+        width: 21%;
+        color: #f3e6d3;
+      }
+      .ctitle h1 {
+        font: 500 clamp(2rem, 3.4vw, 3.2rem)/1.05 var(--serif);
+        letter-spacing: 0.02em;
+      }
+      .ctitle p {
+        font: 500 1.15rem var(--serif);
+        margin-top: 6px;
+      }
+      .ctitle small {
+        display: block;
+        font: italic 500 0.95rem var(--serif);
+        opacity: 0.8;
+        margin-top: 14px;
+      }
+      .open {
+        display: inline-block;
+        margin-top: 26px;
+        font-size: 1.5rem;
+        color: var(--gold);
+        text-decoration: none;
+      }
+      .open:hover {
+        text-decoration: underline;
+      }
+
+      /* ===== JOURNAL ===== */
+      .journal {
+        max-width: 1180px;
+        margin: 0 auto;
+        background: var(--paper);
+        box-shadow: 0 0 40px rgba(0, 0, 0, 0.5);
+      }
+      .spread {
+        position: relative;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 56px;
+        padding: 64px 56px;
+        background-image:
+          radial-gradient(rgba(120, 95, 60, 0.28) 1px, transparent 1.2px),
+          linear-gradient(
+            90deg,
+            transparent 49.6%,
+            rgba(80, 50, 20, 0.16) 50%,
+            transparent 50.8%
+          );
+        background-size:
+          22px 22px,
+          100% 100%;
+      }
+      .spread + .spread {
+        border-top: 1px dashed rgba(80, 50, 20, 0.3);
+      }
+      h2 {
+        font: 700 clamp(2.2rem, 4vw, 3rem)/1 var(--hand);
+        display: inline-block;
+        background: linear-gradient(transparent 62%, var(--blush) 62%);
+        margin-bottom: 22px;
+      }
+      .pg {
+        position: relative;
+      }
+
+      .blob {
+        width: min(340px, 100%);
+        aspect-ratio: 1;
+        margin: 10px auto 0;
+        border: 12px solid var(--rose);
+        border-radius: 48% 52% 46% 54%/55% 45% 55% 45%;
+        overflow: hidden;
+        box-shadow: 0 8px 18px rgba(0, 0, 0, 0.25);
+        background: #aaa;
+      }
+      .blob img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .cap {
+        text-align: center;
+        font: 700 2rem var(--hand);
+        margin-top: 14px;
+        color: var(--rose);
+      }
+      .strip {
+        width: min(330px, 100%);
+        margin: 6px auto 0;
+        background: #151515;
+        padding: 12px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 8px;
+        transform: rotate(2.5deg);
+        box-shadow: 5px 7px 0 rgba(0, 0, 0, 0.18);
+      }
+      .strip img {
+        width: 100%;
+        aspect-ratio: 3/4;
+        object-fit: cover;
+        filter: grayscale(1) contrast(1.1);
+        display: block;
+      }
+      .sticky {
+        background: #d0c8ff11;
+        padding: 18px 20px 20px;
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.14);
+        transform: rotate(-2deg);
+        margin: 34px 0 0;
+        background-image: repeating-linear-gradient(
+          transparent 0 27px,
+          rgba(179, 88, 90, 0.25) 27px 28px
+        );
+      }
+      .sticky h3 {
+        font: 700 1.7rem var(--hand);
+        color: var(--rose);
+        line-height: 1;
+      }
+      .sticky p {
+        font: 500 1.35rem/28px var(--hand);
+      }
+
+      .day {
+        margin-bottom: 30px;
+      }
+      .day h3 {
+        font: 700 1.7rem var(--hand);
+        letter-spacing: 0.02em;
+      }
+      .day h3 span {
+        font-size: 1.2rem;
+        color: var(--rose);
+      }
+      .day ul {
+        list-style: none;
+        padding: 0;
+        margin-top: 2px;
+      }
+      .day li {
+        font: 500 1.28rem/1.3 var(--hand);
+        padding-left: 20px;
+        position: relative;
+        margin: 2px 0;
+      }
+      .day li::before {
+        content: "\2022";
+        position: absolute;
+        left: 4px;
+      }
+      .photo {
+        width: 210px;
+        background: #fff;
+        padding: 9px 9px 30px;
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.16);
+        transform: rotate(3deg);
+        margin: 6px 0 30px auto;
+      }
+      .photo img {
+        width: 100%;
+        aspect-ratio: 1;
+        object-fit: cover;
+        display: block;
+      }
+      .photo figcaption {
+        position: absolute;
+        bottom: 3px;
+        left: 0;
+        right: 0;
+        text-align: center;
+        font: 700 1.15rem var(--hand);
+      }
+      .photo {
+        position: relative;
+      }
+      .wash {
+        height: 36px;
+        margin: 8px -10px 22px;
+        background: repeating-radial-gradient(
+          circle at 18px 18px,
+          #7a2f35 0 8px,
+          #8e3a41 8px 16px
+        );
+        opacity: 0.85;
+        transform: rotate(-1.5deg);
+      }
+
+      .items {
+        display: grid;
+        gap: 34px;
+      }
+      .items {
+        align-content: start;
+      } /* stops the rows stretching */
+      .items > h2 {
+        justify-self: start;
+      } /* highlight hugs the text, not full width */
+      .term {
+        background: #1b1b1b;
+        color: #ff7ab8;
+        font:
+          500 1rem/1.5 "Courier New",
+          monospace;
+        padding: 20px;
+        transform: rotate(-1.5deg);
+        box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.2);
+        --t: #a9b799;
+      }
+      .term em {
+        color: #8fd1a0;
+        font-style: normal;
+      }
+      .ticket {
+        background: #fbf3df;
+        padding: 18px 22px;
+        transform: rotate(1.2deg);
+        border: 2px dashed #9b8660;
+        position: relative;
+        box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.14);
+        --t: #e4c27a;
+      }
+      .ticket b {
+        font: 700 1.7rem var(--hand);
+        display: block;
+        line-height: 1.1;
+      }
+      .ticket::before,
+      .ticket::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        width: 22px;
+        height: 22px;
+        border-radius: 50%;
+        background: var(--paper);
+        border: 2px dashed #9b8660;
+        transform: translateY(-50%);
+      }
+      .ticket::before {
+        left: -13px;
+      }
+      .ticket::after {
+        right: -13px;
+        top: 50%;
+        left: auto;
+        width: 22px;
+        height: 22px;
+        background: var(--paper);
+        transform: translateY(-50%);
+        opacity: 1;
+      }
+      .big {
+        background: var(--rose);
+        color: #fff;
+        padding: 18px 22px;
+        transform: rotate(-1deg);
+        box-shadow: 4px 6px 0 rgba(0, 0, 0, 0.18);
+        --t: #f1cfc9;
+      }
+      .big b {
+        font: 700 3rem/1 var(--hand);
+        display: block;
+      }
+      .pol {
+        background: #fff;
+        padding: 10px 10px 14px;
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.16);
+        transform: rotate(2deg);
+        --t: #b9a3d6;
+      }
+      .pol img {
+        width: 100%;
+        aspect-ratio: 4/3;
+        object-fit: cover;
+        object-position: 50% 45%;
+        filter: grayscale(1);
+        display: block;
+      }
+      .card p,
+      .items p {
+        font-size: 0.88rem;
+        margin-top: 6px;
+      }
+      .note-t {
+        font: 700 1.5rem var(--hand);
+        line-height: 1.1;
+      }
+      .chips {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 8px;
+      }
+      .chips span {
+        background: var(--c, #fff);
+        border-radius: 99px;
+        padding: 1px 11px;
+        font-size: 0.74rem;
+        font-weight: 500;
+        border: 1px solid rgba(0, 0, 0, 0.12);
+      }
+      .items .big .chips span {
+        background: rgba(255, 255, 255, 0.2);
+        border-color: transparent;
+      }
+      .items .term .chips span {
+        background: #333;
+        color: #ffd0e6;
+      }
+
+      .stk {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 9px;
+        margin-bottom: 22px;
+      }
+      .stk span {
+        font: 700 1.2rem var(--hand);
+        background: var(--c);
+        padding: 2px 14px;
+        border-radius: 8px;
+        transform: rotate(var(--r, 0deg));
+        box-shadow: 2px 3px 0 rgba(0, 0, 0, 0.14);
+      }
+      .stk span:nth-child(5n + 1) {
+        --c: #f1cfc9;
+        --r: -2deg;
+      }
+      .stk span:nth-child(5n + 2) {
+        --c: #f3e3a6;
+        --r: 1.5deg;
+      }
+      .stk span:nth-child(5n + 3) {
+        --c: #cfdcc4;
+        --r: -1deg;
+      }
+      .stk span:nth-child(5n + 4) {
+        --c: #d9cdee;
+        --r: 2deg;
+      }
+      .stk span:nth-child(5n) {
+        --c: #fff;
+        --r: -1.5deg;
+      }
+      .ovals {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 16px;
+        margin: 6px 0 28px;
+      }
+      .oval {
+        background: #ffffff60;
+        border: 2px solid var(--rose);
+        border-radius: 50%/62%;
+        padding: 8px 20px;
+        font: 700 1.25rem/1.1 var(--hand);
+        text-align: center;
+        box-shadow: 3px 4px 0 rgba(0, 0, 0, 0.18);
+      }
+      .oval small {
+        display: block;
+        font: 500 0.95rem var(--hand);
+      }
+      .oval:nth-child(odd) {
+        transform: rotate(-3deg);
+      }
+      .oval:nth-child(even) {
+        transform: rotate(2deg);
+      }
+      .hi {
+        background: #fdf7e7;
+        padding: 22px;
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.14);
+        transform: rotate(1.5deg);
+        margin-top: 8px;
+        border-left: 5px solid var(--rose);
+      }
+      .hi a {
+        display: block;
+        font: 700 1.55rem/1.5 var(--hand);
+        text-decoration: none;
+      }
+      .hi a:hover {
+        color: var(--rose);
+        text-decoration: underline;
+      }
+
+      .end {
+        max-width: 1180px;
+        margin: 0 auto;
+        background-color: var(--lin);
+        color: #e9d9c3;
+        text-align: center;
+        padding: 34px 20px;
+        font: italic 500 1.1rem var(--serif);
+        background-image: repeating-linear-gradient(
+          0deg,
+          rgba(0, 0, 0, 0.14) 0 1px,
+          transparent 1px 3px
+        );
+      }
+
+      /* ===== MINIMAL ===== */
+      #min {
+        min-height: 100vh;
+        display: grid;
+        place-items: center;
+        padding: 90px 7vw 60px;
+      }
+      .mgrid {
+        max-width: 980px;
+        display: grid;
+        grid-template-columns: minmax(240px, 0.85fr) 1.2fr;
+        gap: 64px;
+        align-items: center;
+      }
+      .mph {
+        aspect-ratio: 1;
+        background: #c88b8a;
+        border-radius: 50%;
+        overflow: hidden;
+        border: 10px solid #fff;
+        box-shadow: 0 0 0 1px #e6dccb;
+      }
+      .mph img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+      .mtx .nm {
+        font: 700 1.5rem var(--hand);
+        color: var(--rose);
+      }
+      .mtx .lead {
+        font: 500 clamp(1.7rem, 3vw, 2.4rem)/1.2 var(--serif);
+        margin: 6px 0 22px;
+      }
+      .mtx p {
+        max-width: 46ch;
+        margin-bottom: 1em;
+        color: #4b3b36;
+      }
+      .mtx .links {
+        display: flex;
+        gap: 22px;
+        margin-top: 28px;
+        font-weight: 500;
+      }
+      .mtx .links a {
+        text-decoration: none;
+        border-bottom: 1.5px solid var(--rose);
+        padding-bottom: 2px;
+      }
+      .mtx .links a:hover {
+        color: var(--rose);
+      }
+      /* ---- CSS: add anywhere inside <style> ---- */
+      .mirror {
+        width: 150px;
+        aspect-ratio: 1;
+        margin: 30px 30px 0 auto;
+        border-radius: 50%;
+        border: 6px solid #fff;
+        overflow: hidden;
+        transform: rotate(-4deg);
+        box-shadow: 3px 5px 0 rgba(0, 0, 0, 0.18);
+        background: #aaa;
+      }
+      .mirror img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        display: block;
+      }
+
+      @media (max-width: 900px) {
+        .cover::after {
+          display: none;
+        }
+        .cover {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          padding: 90px 20px 180px;
+          gap: 34px;
+        }
+        .polaroid,
+        .ctitle {
+          position: static;
+        }
+        .polaroid {
+          width: 260px;
+        }
+        .clip {
+          left: calc(50% + 40px);
+          top: 74px;
+        }
+        .ctitle {
+          text-align: center;
+          width: auto;
+        }
+        .s1,
+        .s2 {
+          top: auto;
+          bottom: 110px;
+        }
+        .lockets {
+          top: auto;
+          bottom: 20px;
+          left: 50%;
+          transform: translateX(-50%);
+        }
+        .spread {
+          grid-template-columns: 1fr;
+          gap: 34px;
+          padding: 48px 22px;
+          background-image: radial-gradient(
+            rgba(120, 95, 60, 0.28) 1px,
+            transparent 1.2px
+          );
+          background-size: 22px 22px;
+        }
+        .mgrid {
+          grid-template-columns: 1fr;
+          gap: 34px;
+          text-align: left;
+        }
+        .mph {
+          max-width: 300px;
+        }
+      }
+      @media (max-width: 480px) {
+        .lockets {
+          gap: 10px;
+          bottom: 32px;
+        }
+        .lockets i {
+          width: 58px;
+          height: 58px;
+          border-width: 5px;
+        }
+        .phone {
+          width: 130px;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          animation: none !important;
+          transition: none !important;
+        }
+        html {
+          scroll-behavior: auto;
+        }
+      }
+    </style>
+  </head>
+  <body data-mode="maximal">
+    <div class="toggle" role="group" aria-label="Choose layout">
+      <button id="bMin" aria-pressed="false">minimal</button>
+      <button id="bMax" aria-pressed="true">maximal</button>
+    </div>
+
+    <!-- ================= MAXIMAL ================= -->
+    <div id="max">
+      <header class="cover">
+        <figure class="polaroid">
+          <img
+            src="assets/bhavyaaaa.png"
+            alt="Bhavyaa smiling under a tree at night"
+          />
+          <figcaption>hi, i'm bhavyaa</figcaption>
+        </figure>
+        <div class="clip"></div>
+        <div class="string s1"></div>
+        <div class="string s2"></div>
+        <div class="lockets" aria-hidden="true">
+          <div>
+            <b></b><i><img src="assets/ring.jpeg" alt="" /></i>
+          </div>
+          <div>
+            <b></b><i><img src="assets/awsbadge.png" alt="" /></i>
+          </div>
+          <div>
+            <b></b><i><img src="assets/shimmer.jpg" alt="" /></i>
+          </div>
+          <div>
+            <b></b><i><img src="assets/goldenhour.jpg" alt="" /></i>
+          </div>
+        </div>
+        <div class="ctitle">
+          <h1>Bhavyaa</h1>
+          <p>software engineer</p>
+          <small>notes from a 3:46 AM mind</small>
+          <a class="open hand" href="#about">open the journal</a>
+        </div>
+      </header>
+
+      <main class="journal">
+        <section class="spread" id="about">
+          <div class="pg">
+            <div class="blob">
+              <img src="assets/headshot.jpg" alt="Portrait of Bhavyaa" />
+            </div>
+            <div class="cap">
+              Bhavyaa
+              <h5>
+                Computer Science and Engineering <br />
+                @ VIT-AP University
+              </h5>
+            </div>
+            <span
+              class="st"
+              style="left: 6%; top: 6%; transform: rotate(14deg)"
+            ></span>
+            <span
+              class="st"
+              style="right: 4%; top: 40%; width: 20px; height: 20px"
+            ></span>
+          </div>
+          <div class="pg">
+            <div class="strip tape" style="--t: #b9a3d6">
+              <img src="assets/badminton.jpeg" alt="" loading="lazy" /><img
+                src="assets/dance.jpeg"
+                alt=""
+                loading="lazy"
+              /><img src="assets/wiinn.jpeg" alt="" loading="lazy" /><img
+                src="assets/medalled.jpeg"
+                alt=""
+                loading="lazy"
+              />
+            </div>
+            <div class="sticky tape" style="--t: #f3e3a6">
+              <h3>about</h3>
+              <p>
+                I have done 2 tech internships where I got to build full-stack,
+                web and mobile apps! I usually have a strong urge at night to
+                start my youtube channel where I can yap all about my ideas but
+                by morning I just find myself coding and going about the day.
+              </p>
+            </div>
+          </div>
+        </section>
+
+        <section class="spread" id="work">
+          <div class="pg">
+            <h2>work diary entry</h2>
+            <div class="day">
+              <h3>Apr &ndash; Jul 2026 <span>PsiPhiETC Anveshika</span></h3>
+              <ul>
+                <li>Initiative by Prof. HC Verma, Hyderabad</li>
+                <li>YouTube grew 10.3K &rarr; 25K subs (+150%)</li>
+                <li>Revamped the website, SEO-first</li>
+                <li>Essays, podcasts, JEE topper interviews</li>
+              </ul>
+            </div>
+            <div class="day">
+              <h3>
+                Nov 2025 &ndash; Mar 2026 <span>Stratnova Technologies</span>
+              </h3>
+              <ul>
+                <li>Led frontend of Aura AI, Flutter + React, 500K+ users</li>
+                <li>25+ reusable components</li>
+                <li>SEO rank 11.3 &rarr; 3.8, traffic 2.5x</li>
+                <li>App size 115MB &rarr; 77MB with Blender assets</li>
+              </ul>
+            </div>
+          </div>
+          <div class="pg">
+            <figure class="photo tape" style="--t: #42b1ec">
+              <img src="assets/noodles.jpg" alt="Bhavyaa eating noodles" />
+              <figcaption>for the love of chopsticks</figcaption>
+            </figure>
+            <div class="day">
+              <h3>Aug 2023 &ndash; Dec 2024 <span>Tenhauser Digital</span></h3>
+              <ul>
+                <li>Junior Flutter dev, remote (Los Angeles)</li>
+                <li>Shipped 3 production apps with BLoC and Riverpod</li>
+                <li>Built a Firebase + Stripe admin dashboard</li>
+                <li>Cut 17 redundant routes, fixed CORS via Node proxy</li>
+              </ul>
+            </div>
+            <!-- <div class="wash"></div> -->
+          </div>
+        </section>
+
+        <section class="spread" id="projects">
+          <div class="pg items">
+            <h2>things i made</h2>
+            <div class="term tape">
+              <div><em>$</em> npx skeldir my-app</div>
+              <div>&gt; scaffolding 7 languages...</div>
+              <div>&gt; git init, .gitignore, done_</div>
+              <p style="color: #f4d7e4">
+                Skeldir: open-source CLI with 238+ weekly downloads.
+              </p>
+              <div class="chips">
+                <span>Node.js</span><span>npm</span><span>Git</span>
+              </div>
+            </div>
+            <div class="ticket tape">
+              <b>RailMadad (Enhanced)</b>
+              <p>
+                Complaint in, right desk out. TF-IDF categorisation with async
+                Spring Boot, tested APIs, GitHub Actions CI/CD.
+              </p>
+              <div class="chips">
+                <span style="--c: #f1cfc9">Java</span
+                ><span style="--c: #cfdcc4">PostgreSQL</span
+                ><span style="--c: #d9cdee">Docker</span>
+              </div>
+            </div>
+          </div>
+          <div class="pg items">
+            <div class="big tape">
+              <b>500K+ downloads</b>
+              <div class="note-t">Aura AI</div>
+              <p>
+                Flutter and React app, a standard component library, live
+                horoscope APIs. A project I contributed to and am proud of!
+              </p>
+              <div class="chips">
+                <span>Flutter</span><span>React</span><span>Supabase</span>
+              </div>
+            </div>
+            <figure class="pol tape" style="--t: #b9a3d9">
+              <!-- <img src="assets/yoga.jpg" alt="Standing pose photo" />
+              <figcaption class="note-t" style="margin-top: 8px">
+                i liked this photo but the project is cooler
+              </figcaption> -->
+              <p>
+                MoveNet + OpenCV pose engine on a Raspberry Pi, inside a
+                Blender-modelled, 3D-printed figure.
+              </p>
+              <div class="chips">
+                <span style="--c: #f3e3a6">TensorFlow</span
+                ><span style="--c: #f1cfc9">React Native</span
+                ><span style="--c: #cfdcc4">Pi</span>
+              </div>
+            </figure>
+          </div>
+        </section>
+
+        <section class="spread" id="achievements">
+          <div class="pg">
+            <h2>grateful for achievements</h2>
+            <div class="ovals">
+              <div class="oval">AWS SAA C03<small>Oct 2025</small></div>
+              <div class="oval">Top 10<small>VLaunchPad 2025</small></div>
+              <div class="oval">Google Cyber<small>Dec 2023</small></div>
+              <div class="oval">LeetCode<small>150 solved</small></div>
+              <div class="oval">B.Tech CSE<small>VIT-AP, 8.71</small></div>
+              <div class="oval">
+                Badminton Doubles<small>Winner 2023</small>
+              </div>
+            </div>
+          </div>
+          <div class="pg">
+            <h2>say hi</h2>
+
+            <div class="hi tape" style="--t: #d9a7a0">
+              <a href="mailto:andbhavyaa@gmail.com">andbhavyaa@gmail.com</a>
+              <a
+                href="https://github.com/andbhavyaa"
+                target="_blank"
+                rel="noopener"
+                >github.com/andbhavyaa</a
+              >
+              <a
+                href="https://linkedin.com/in/andbhavyaa"
+                target="_blank"
+                rel="noopener"
+                >linkedin.com/in/andbhavyaa</a
+              >
+            </div>
+
+            <span
+              class="st"
+              style="right: 8%; bottom: 6%; transform: rotate(-12deg)"
+            ></span>
+            <span
+              class="st"
+              style="right: 20%; bottom: 14%; width: 18px; height: 18px"
+            ></span>
+          </div>
+        </section>
+      </main>
+      <footer class="end">written at 3:46 AM, shipped by Bhavyaa</footer>
+    </div>
+
+    <!-- ================= MINIMAL ================= -->
+    <div id="min">
+      <div class="mgrid">
+        <div class="mph">
+          <img src="assets/headshot.jpg" alt="Portrait of Bhavyaa" />
+        </div>
+        <div class="mtx">
+          <p class="nm">Bhavyaa</p>
+          <p class="lead">
+            Software engineer who builds apps people use, then makes them
+            pretty.
+          </p>
+          <p>
+            I graduated with a B.Tech. in Computer Science at VIT-AP and I've
+            done 2 remote tech internships. I work across Flutter, React, Spring
+            Boot and AWS. Off screen it's badminton smashes at 45&deg; :p and
+            ideas that arrive at 3:46 AM. I like to dance, make video edits, and
+            take photos (actually I have many more hobbies I just don't want to
+            spam on the minimal side)
+          </p>
+          <p>
+            Most recent numbers: I led frontend of Aura AI now serving 500K+
+            users, also made a tiny CLI tool called Skeldir (238+ weekly
+            downloads), and a pose-tracking figure that lives on a Raspberry Pi.
+            Lastly, for the love of physics, I made content around Physics
+            working with Scientists in Prof. HC Verma sir's Anveshika.
+          </p>
+          <div class="links">
+            <a href="mailto:andbhavyaa@gmail.com">Email</a>
+            <a
+              href="https://github.com/andbhavyaa"
+              target="_blank"
+              rel="noopener"
+              >GitHub</a
+            >
+            <a
+              href="https://linkedin.com/in/andbhavyaa"
+              target="_blank"
+              rel="noopener"
+              >LinkedIn</a
+            >
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      (function () {
+        var body = document.body,
+          bMin = document.getElementById("bMin"),
+          bMax = document.getElementById("bMax");
+        function set(m) {
+          body.dataset.mode = m;
+          bMin.setAttribute("aria-pressed", m === "minimal");
+          bMax.setAttribute("aria-pressed", m === "maximal");
+          try {
+            localStorage.setItem("mode", m);
+          } catch (e) {}
+          window.scrollTo(0, 0);
+        }
+        var q = new URLSearchParams(location.search).get("mode"),
+          s = null;
+        try {
+          s = localStorage.getItem("mode");
+        } catch (e) {}
+        set((q || s) === "minimal" ? "minimal" : "maximal");
+        bMin.onclick = function () {
+          set("minimal");
+        };
+        bMax.onclick = function () {
+          set("maximal");
+        };
+      })();
+    </script>
+  </body>
+</html>
